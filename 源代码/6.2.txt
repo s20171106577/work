@@ -1,0 +1,15 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<unistd.h>
+#include<malloc.h>
+#define FILE_PATH "C:\韩丝媛相关软件\work\work\选课表.csv" 
+#define BUFF_LEN 256
+int main()
+{
+	FILE *fp = NULL;
+	char *file = FILE_PATH;
+	printf("open %s failed\n",file);
+	return 0;
+
+
+} 
