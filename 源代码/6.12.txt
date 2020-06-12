@@ -1,0 +1,56 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+struct stu_info
+{
+    char num[20];
+	char name[20];
+	char sex[3];
+	char phone_no[12];
+	float math;
+	float phy;	
+};
+
+int main()
+{
+	FILE *fp;
+	struct stu_info student;
+	char str[100];
+	char strtemp[100];
+	int temp;
+	int oldPos;
+	fp=fopen("C:/韩丝媛相关软件/work/work/001.csv","r");
+	if(!fp){
+		printf("文件打开失败！");
+		exit(1); 
+	}
+	
+	fscanf(fp,"%s",str);
+	printf("%s\n",str);
+	temp=strchr(str,',')-str;
+	strncpy(student.num,str,temp);
+	oldPos=temp;
+	temp=strchr(str+oldPos+1,',')-str;
+	strncpy(student.name,str+oldPos+1,temp-oldPos-1);
+	student.name[temp-oldPos-1]=0;
+	oldPos=temp;
+	temp=strchr(str+oldPos+1,',')-str;
+	strncpy(student.sex,str+oldPos+1,temp-oldPos-1);
+	student.sex[2]='\0';
+	oldPos=temp;
+	temp=strchr(str+oldPos+1,',')-str;
+	strncpy(student.phone_no,str+oldPos+1,temp-oldPos-1);
+	student.phone_no[temp-oldPos]='\0';
+	oldPos=temp;
+	temp=strchr(str+oldPos+1,',')-str;
+	strncpy(strtemp,str+oldPos+1,temp-oldPos-1);
+	strtemp[temp-oldPos-1]='\0';
+	student.math=atof(strtemp);
+	oldPos=temp;
+	strncpy(strtemp,str+oldPos+1,temp-oldPos-1);
+	strtemp[temp-oldPos-1]='\0';
+	student.phy=atof(strtemp);
+	printf("%s %s %s %s %f %f\n",student.num,student.name,student.sex,student.phone_no,student.math,student.phy);
+	fclose(fp);
+	return 0;
+}
