@@ -1,22 +1,38 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 #include<unistd.h>
 #include<malloc.h>
 #define FILE_PATH "C:/韩丝媛相关软件/work/work/001.csv" 
-#define BUFF_LEN 300 
-int main()
+#define BUFF_LEN 256 //长度 缓冲 
+//void output(struct str out[10000]);
+typedef struct outstudent{
+	char num[15];//学号 
+	double jidian;//平均绩点 
+	int pass;//毕业？
+};
+typedef struct instudent{
+	char innum[15];//学号
+	double ingrade;//成绩 
+	double sjidian;	//绩点
+	double spoint;//学绩点 
+}; 
+void spont()
 {
-	char num[20];
-	char str[100];
-	char strtemp[100];
-	float grade[20];//分数 
-	char classes_quality[20];//课程性质 
-	float classes_grade;//学分 
+	instudent.sjidian=instudent.ingrade/10-5;
+	if(student.spoint<0)
+	{
+		student.spoint=0;
+	}
+	student.spoint=student.sjidian*student.ingrade; 
+} 
+int main()
+{	 
 	int temp;
 	int oldPos;
 	FILE *fp = NULL; //声明一个文件类型指针，赋值为空
 	char *file = FILE_PATH;//声明一个字符类型指针
-	char *line = (char *)malloc(BUFF_LEN * sizeof(char));//申请了一个char line[256]   #define BUFF_LEN 300  
+	char *line = (char *)malloc(BUFF_LEN * sizeof(char));//申请了一个char line[256]   #define BUFF_LEN 256  
 	if( (0 != access(file,R_OK|F_OK)) || (NULL==(fp=fopen(file,"r"))) )//两个库函数access和fopen（打开文件）  存在文件access为0，不存在回—1 
 	// R_OK是否有写入权限F_OK判断文件是否存在 
 	{
@@ -25,7 +41,7 @@ int main()
 	}
 	while( fgets(line, BUFF_LEN, fp) != NULL )//逐行读取数据，fgets(buf,n,fp);表示从 fp 指向的文件中 读取n个字符放到 buf 字符数组中去。 
 	{
-	fscanf(fp,"%s",str);
+/*	fscanf(fp,"%s",str);
 	temp=strchr(str,',')-str;
 	strncpy(num,str,temp);
 	oldPos=temp;
@@ -40,7 +56,7 @@ int main()
 	temp=strchr(str+oldPos+1,',')-str;
 	strncpy(classes_grade,str+oldPos+1,temp-oldPos-1);
 	class_grade[temp-oldPos]='\0';
-	oldPos=temp;
+	oldPos=temp;*/ 
 		printf("\n%s",line);//输出line所指的内容 
 	}
 	printf("open %s failed\n",file);
