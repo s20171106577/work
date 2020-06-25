@@ -4,20 +4,20 @@
 #include<unistd.h>
 #include<malloc.h>
 #define MAX 3 
-#define FILE_PATH "C:/º«Ë¿æÂÏà¹ØÈí¼ş/work/work/001.csv" 
-#define BUFF_LEN 256 //³¤¶È »º³å 
+#define FILE_PATH "C:/éŸ©ä¸åª›ç›¸å…³è½¯ä»¶/work/work/001.csv" 
+#define BUFF_LEN 256 //é•¿åº¦ ç¼“å†² 
 //void output(struct str out[10000]);
 struct ostudent{
-	char num[15];//Ñ§ºÅ 
-	double jidian;//Æ½¾ù¼¨µã 
-	int pass;//±ÏÒµ·ñ£¿
+	char num[15];//å­¦å· 
+	double jidian;//å¹³å‡ç»©ç‚¹ 
+	int pass;//æ¯•ä¸šå¦ï¼Ÿ
 };
 
 struct instudent{
-	char innum[15];//Ñ§ºÅ
-	double ingrade;//³É¼¨ 
-	double sjidian;	//¼¨µã
-	double spoint;//Ñ§¼¨µã 
+	char innum[15];//å­¦å·
+	double ingrade;//æˆç»© 
+	double sjidian;	//ç»©ç‚¹
+	double spoint;//å­¦ç»©ç‚¹ 
 }student;
 void spoint()
 {
@@ -28,7 +28,7 @@ void spoint()
 	}
 	student.spoint=student.sjidian*student.ingrade; 
 } 
-void outstudent(struct ostudent stu[10005]);//º¯ÊıÉùÃ÷, ¸Ãº¯ÊıµÄ¹¦ÄÜÊÇÊä³öÑ§ºÅ×î´óµÄÑ§ÉúĞÅÏ¢
+void outstudent(struct ostudent stu[10005]);//å‡½æ•°å£°æ˜, è¯¥å‡½æ•°çš„åŠŸèƒ½æ˜¯è¾“å‡ºå­¦å·æœ€å¤§çš„å­¦ç”Ÿä¿¡æ¯
 int main(void)
 {
     int i;
@@ -46,16 +46,16 @@ int main(void)
  	 
 	int temp;
 	int oldPos;
-	FILE *fp = NULL; //ÉùÃ÷Ò»¸öÎÄ¼şÀàĞÍÖ¸Õë£¬¸³ÖµÎª¿Õ
-	char *file = FILE_PATH;//ÉùÃ÷Ò»¸ö×Ö·ûÀàĞÍÖ¸Õë
-	char *line = (char *)malloc(BUFF_LEN * sizeof(char));//ÉêÇëÁËÒ»¸öchar line[256]   #define BUFF_LEN 256  
-	if( (0 != access(file,R_OK|F_OK)) || (NULL==(fp=fopen(file,"r"))) )//Á½¸ö¿âº¯ÊıaccessºÍfopen£¨´ò¿ªÎÄ¼ş£©  ´æÔÚÎÄ¼şaccessÎª0£¬²»´æÔÚ»Ø¡ª1 
-	// R_OKÊÇ·ñÓĞĞ´ÈëÈ¨ÏŞF_OKÅĞ¶ÏÎÄ¼şÊÇ·ñ´æÔÚ 
+	FILE *fp = NULL; //å£°æ˜ä¸€ä¸ªæ–‡ä»¶ç±»å‹æŒ‡é’ˆï¼Œèµ‹å€¼ä¸ºç©º
+	char *file = FILE_PATH;//å£°æ˜ä¸€ä¸ªå­—ç¬¦ç±»å‹æŒ‡é’ˆ
+	char *line = (char *)malloc(BUFF_LEN * sizeof(char));//ç”³è¯·äº†ä¸€ä¸ªchar line[256]   #define BUFF_LEN 256  
+	if( (0 != access(file,R_OK|F_OK)) || (NULL==(fp=fopen(file,"r"))) )//ä¸¤ä¸ªåº“å‡½æ•°accesså’Œfopenï¼ˆæ‰“å¼€æ–‡ä»¶ï¼‰  å­˜åœ¨æ–‡ä»¶accessä¸º0ï¼Œä¸å­˜åœ¨å›â€”1 
+	// R_OKæ˜¯å¦æœ‰å†™å…¥æƒé™F_OKåˆ¤æ–­æ–‡ä»¶æ˜¯å¦å­˜åœ¨ 
 	{
-		printf("open %s failed\n",file);//Êä³öfileËùÖ¸ÄÚÈİ 
+		printf("open %s failed\n",file);//è¾“å‡ºfileæ‰€æŒ‡å†…å®¹ 
 		return -1;
 	}
-	while( fgets(line, BUFF_LEN, fp) != NULL )//ÖğĞĞ¶ÁÈ¡Êı¾İ£¬fgets(buf,n,fp);±íÊ¾´Ó fp Ö¸ÏòµÄÎÄ¼şÖĞ ¶ÁÈ¡n¸ö×Ö·û·Åµ½ buf ×Ö·ûÊı×éÖĞÈ¥¡£ 
+	while( fgets(line, BUFF_LEN, fp) != NULL )//é€è¡Œè¯»å–æ•°æ®ï¼Œfgets(buf,n,fp);è¡¨ç¤ºä» fp æŒ‡å‘çš„æ–‡ä»¶ä¸­ è¯»å–nä¸ªå­—ç¬¦æ”¾åˆ° buf å­—ç¬¦æ•°ç»„ä¸­å»ã€‚ 
 	{
 /*	fscanf(fp,"%s",str);
 	temp=strchr(str,',')-str;
@@ -73,13 +73,12 @@ int main(void)
 	strncpy(classes_grade,str+oldPos+1,temp-oldPos-1);
 	class_grade[temp-oldPos]='\0';
 	oldPos=temp;*/ 
-		printf("\n%s",line);//Êä³ölineËùÖ¸µÄÄÚÈİ 
+		printf("\n%s",line);//è¾“å‡ºlineæ‰€æŒ‡çš„å†…å®¹ 
 	}
 	printf("open %s failed\n",file);
 	if(fp!=NULL)
 	{
-		fclose(fp);//¹Ø±ÕfpÖ¸µÄÎÄ¼ş¼Ğ
+		fclose(fp);//å…³é—­fpæŒ‡çš„æ–‡ä»¶å¤¹
 	}
 	return 0;
 }
-
