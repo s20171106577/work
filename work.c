@@ -6,19 +6,24 @@
 #define MAX 3 
 #define FILE_PATH "C:/韩丝媛相关软件/work/work/001.csv" 
 #define BUFF_LEN 256 //长度 缓冲 
+int txt[10005];
 //void output(struct str out[10000]);
 struct ostudent{
-	char num[15];//学号 
+	char num[20];//学号 
 	double jidian;//平均绩点 
 	int pass;//毕业否？
-};
-
+	double add_spoint;//学绩点和
+	double add_credit;//课程学分和 
+}o[10005];
 struct instudent{
 	char innum[15];//学号
 	double ingrade;//成绩 
+	double credit;//学分
 	double sjidian;	//绩点
 	double spoint;//学绩点 
+	struct ostudent add;//毕业学生个数 
 }student;
+//计算学绩点 
 void spoint()
 {
 	student.sjidian=student.ingrade/10-5;
@@ -27,23 +32,24 @@ void spoint()
 		student.spoint=0;
 	}
 	student.spoint=student.sjidian*student.ingrade; 
-} 
-void outstudent(struct ostudent stu[10005]);//函数声明, 该函数的功能是输出学号最大的学生信息
-int main(void)
+}  
+//每个学生总学分和总学绩点
+void innum() 
 {
-    int i;
-    int h;
-    int s;
-    char a=student.innum[15];
-    int j=(student.innum[a-4]-'0')*1000+(student.innum[a-3]-'0')*100+(student.innum[a-2]-'0')*10+(student.innum[a-1]-'0');;
-    struct ostudent stu[10005];
-    for (i=0; i<9999; ++i)
-    {
-        h+=student.ingrade;
-        s+=student.spoint; 
-    }
-    ostudent(stu);
- 	 
+    int a=11;
+    int j=(student.innum[a-4]-'0')*1000+(student.innum[a-3]-'0')*100+(student.innum[a-2]-'0')*10+(student.innum[a-1]-'0');
+    if(txt[j]==-1)
+	{
+		txt[j] = 1;
+		strcpy(o[txt[j]].num,student.innum);
+	}
+	o[txt[j]].add_credit+=student.credit;
+	o[txt[j]].add_spoint+=student.spoint;
+}
+//开文件
+ 
+int main()
+{ 
 	int temp;
 	int oldPos;
 	FILE *fp = NULL; //声明一个文件类型指针，赋值为空
@@ -57,22 +63,6 @@ int main(void)
 	}
 	while( fgets(line, BUFF_LEN, fp) != NULL )//逐行读取数据，fgets(buf,n,fp);表示从 fp 指向的文件中 读取n个字符放到 buf 字符数组中去。 
 	{
-/*	fscanf(fp,"%s",str);
-	temp=strchr(str,',')-str;
-	strncpy(num,str,temp);
-	oldPos=temp;
-	temp=strchr(str+oldPos+1,',')-str;
-	strncpy(grade,str+oldPos+1,temp-oldPos-1);
-	num[temp-oldPos-1]=0;
-	oldPos=temp;
-	temp=strchr(str+oldPos+1,',')-str;
-	strncpy(classes_quality,str+oldPos+1,temp-oldPos-1);
-	classes_quality[2]='\0';
-	oldPos=temp;
-	temp=strchr(str+oldPos+1,',')-str;
-	strncpy(classes_grade,str+oldPos+1,temp-oldPos-1);
-	class_grade[temp-oldPos]='\0';
-	oldPos=temp;*/ 
 		printf("\n%s",line);//输出line所指的内容 
 	}
 	printf("open %s failed\n",file);
