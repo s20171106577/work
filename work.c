@@ -3,8 +3,7 @@
 #include<string.h>
 #include<unistd.h>
 #include<malloc.h>
-#define MAX 3 
-#define FILE_PATH "C:/韩丝媛相关软件/work/work/001.csv" 
+#define FILE_PATH "C:/Users/修百会/Desktop/ff/001.csv" 
 #define BUFF_LEN 256 //长度 缓冲 
 int txt[10005];
 //void output(struct str out[10000]);
@@ -14,6 +13,7 @@ struct ostudent{
 	int pass;//毕业否？
 	double add_spoint;//学绩点和
 	double add_credit;//课程学分和 
+	double agv_grade;//平均成绩
 }o[10005];
 struct instudent{
 	char innum[15];//学号
@@ -37,15 +37,43 @@ void spoint()
 void innum() 
 {
     int a=11;
+    int y=0;//用来计数 
     int j=(student.innum[a-4]-'0')*1000+(student.innum[a-3]-'0')*100+(student.innum[a-2]-'0')*10+(student.innum[a-1]-'0');
     if(txt[j]==-1)
 	{
-		txt[j] = 1;
+		txt[j] = ++y;
 		strcpy(o[txt[j]].num,student.innum);
 	}
 	o[txt[j]].add_credit+=student.credit;
 	o[txt[j]].add_spoint+=student.spoint;
 }
+//写文件
+void w_file()
+{
+	FILE *outPut=fopen("C:/Users/修百会/Desktop/ff/001.csv","w");			//写文件 
+	if(outPut==NULL)
+	{
+		printf("output File open error!\n");
+		exit(0);
+	}
+	fprintf(outPut,"学号,平均成绩，平均学绩点,是否能毕业\n"); 
+//计算单个学生绩点成绩，判断是否可以毕业 
+	for(int i=1;i<=y;i++)
+	{
+		o[i].jidian=o[txt[j]].add_credit / o[i].add_credit;	
+		o[i].agv_grade=o[i].add_spoint / i;	
+		if(o[i].jidian>=2)
+		{
+			strcpy(o[i].pass,"是 ");
+		} 
+		else
+		{
+			strcpy(o[i].pass,"否");
+		}
+		fprintf(outPut,"%s,%2lf,%.2lf,%s\n",o[i].num,o[i].agv_grade,o[i].jidian,o[i].pass); 
+	}
+	fclose(outPut);
+} 
 //开文件
  
 int main()
