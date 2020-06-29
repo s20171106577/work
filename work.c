@@ -5,6 +5,7 @@
 #include<malloc.h>
 #define FILE_PATH "C:/Users/修百会/Desktop/ff/001.csv" 
 #define BUFF_LEN 256 //长度 缓冲 
+int y=0;//用来计数 
 int txt[10005];
 //void output(struct str out[10000]);
 struct ostudent{
@@ -37,7 +38,7 @@ void spoint()
 void innum() 
 {
     int a=11;
-    int y=0;//用来计数 
+    
     int j=(student.innum[a-4]-'0')*1000+(student.innum[a-3]-'0')*100+(student.innum[a-2]-'0')*10+(student.innum[a-1]-'0');
     if(txt[j]==-1)
 	{
@@ -50,7 +51,7 @@ void innum()
 //写文件
 void w_file()
 {
-	FILE *outPut=fopen("C:/Users/修百会/Desktop/ff/001.csv","w");			//写文件 
+	FILE *outPut=FILE_PATH;			//写文件 
 	if(outPut==NULL)
 	{
 		printf("output File open error!\n");
@@ -58,19 +59,20 @@ void w_file()
 	}
 	fprintf(outPut,"学号,平均成绩，平均学绩点,是否能毕业\n"); 
 //计算单个学生绩点成绩，判断是否可以毕业 
-	for(int i=1;i<=y;i++)
+	int x=1;
+	for(x<=y;x++)
 	{
-		o[i].jidian=o[txt[j]].add_credit / o[i].add_credit;	
-		o[i].agv_grade=o[i].add_spoint / i;	
-		if(o[i].jidian>=2)
+		o[x].jidian=o[txt[j]].add_credit / o[x].add_credit;	
+		o[x].agv_grade=o[x].add_spoint / x;	
+		if(o[x].jidian>=2)
 		{
-			strcpy(o[i].pass,"是 ");
+			strcpy(o[x].pass,"是 ");
 		} 
 		else
 		{
-			strcpy(o[i].pass,"否");
+			strcpy(o[x].pass,"否");
 		}
-		fprintf(outPut,"%s,%2lf,%.2lf,%s\n",o[i].num,o[i].agv_grade,o[i].jidian,o[i].pass); 
+		fprintf(outPut,"%s,%2lf,%.2lf,%s\n",o[x].num,o[x].agv_grade,o[x].jidian,o[x].pass); 
 	}
 	fclose(outPut);
 } 
@@ -83,7 +85,7 @@ int main()
 	FILE *fp = NULL; //声明一个文件类型指针，赋值为空
 	char *file = FILE_PATH;//声明一个字符类型指针
 	char *line = (char *)malloc(BUFF_LEN * sizeof(char));//申请了一个char line[256]   #define BUFF_LEN 256  
-	if( (0 != access(file,R_OK|F_OK)) || (NULL==(fp=fopen(file,"r"))) )//两个库函数access和fopen（打开文件）  存在文件access为0，不存在回—1 
+	if( (0 != access(file,R_OK|F_OK)) || (NULL==(fp=fopen(file,"w"))) )//两个库函数access和fopen（打开文件）  存在文件access为0，不存在回—1 
 	// R_OK是否有写入权限F_OK判断文件是否存在 
 	{
 		printf("open %s failed\n",file);//输出file所指内容 
