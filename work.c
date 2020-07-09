@@ -19,9 +19,9 @@ int readFile()
 	int n=0;
 	if ((fp = fopen("001.csv", "at+")) != NULL)
 	{
-		fseek(fp, 170L, SEEK_SET); 
+	
 		char delims[] = ",";
-		char* result = NULL;
+	
 		int j = 0;
 		printf("学号\t    平均成绩点\t是否毕业\n");
 		while ((line = fgets(buffer, sizeof(buffer), fp)) != NULL)
@@ -52,22 +52,7 @@ int readFile()
 						strcpy(st->id, record);
 					}
 				}
-				else if(j==11)
-				{
-					//printf("%s\t", record);
-					strcpy(st->isOk, record);
-				}
-				else if (j == 13)
-				{
-					//printf("%s\t", record);
-					if (!strcmp(st->isOk,"必修"))
-					{
-						int  s= atof(record);
-						st->score += s * (num / 10 - 5);
-						n++;
-					}
-				}
-					else if (j == 9)
+				else if (j == 9)
 				{
 					if (!strcmp(st->isOk, "必修"))
 					{
@@ -85,6 +70,22 @@ int readFile()
 						
 					}
 				}
+				else if(j==11)
+				{
+					//printf("%s\t", record);
+					strcpy(st->isOk, record);
+				}
+				else if (j == 13)
+				{
+					//printf("%s\t", record);
+					if (!strcmp(st->isOk,"必修"))
+					{
+						int  s= atof(record);
+						st->score += s * (num / 10 - 5);
+						n++;
+					}
+				}
+					
 				record = strtok(NULL, ",");
 				//将读取到的每一个数据打印出来
 				if (j == 22)  //只需读取前22列
